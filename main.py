@@ -5,6 +5,7 @@ Executa o fluxo consolidado de dados:
 2. Agrupamento de catálogo e faturamento por produto.
 3. Filtro e exportação de vendas recusadas para resgate comercial.
 4. Auditoria de transações atípicas e volume financeiro regional.
+5. Inteligência de precificação e benchmark com concorrentes.
 """
 
 from pathlib import Path
@@ -12,6 +13,7 @@ from src.agrupamento_produtos import (
     calcular_faturamento_por_produto,
     obter_catalogo_produtos,
 )
+from src.analise_concorrencia import calculo_concorrentes, dados_concorrentes
 from src.analise_fraude import TRANSACOES_EXEMPLO, processar_lote_transacoes
 from src.constantes import LIMITE_ALERTA_PADRAO
 from src.resgate_vendas import (
@@ -26,9 +28,9 @@ def executar_pipeline():
     caminho_dados = raiz / "data" / "raw" / "dados_vendas_bruto.csv"
     caminho_saida = raiz / "data" / "processed" / "resgate_urgente.csv"
 
-    print("\n" + "=" * 60)
+    print("\n" + "=" * 62)
     print("      E-COMMERCE SALES & RISK ANALYSIS PIPELINE")
-    print("=" * 60)
+    print("=" * 62)
 
     # 1. Ingestão
     print("\n[ETAPA 1] Ingestao de Dados de Vendas...")
@@ -67,11 +69,26 @@ def executar_pipeline():
 
     print("\n-> Distribuicao Financeira por Praca:")
     for cidade, volume in sorted(volume_cidades.items(), key=lambda x: x[1], reverse=True):
-        print(f"   [REGIAO] {cidade:<15}: R$ {volume:>9.2f}")
+        print(f"   [REGIAO] {cidade:<16}: R$ {volume:>9.2f}")
 
-    print("\n" + "=" * 60)
+    # 5. Inteligência de Precificação e Concorrência
+    print("\n[ETAPA 5] Inteligencia de Precos e Analise de Concorrencia...")
+    preco_nossa_loja = 2450.0
+    concorrente_top, valor_rebaixamento, media_mercado = calculo_concorrentes(
+        dados_concorrentes, preco_nossa_loja
+    )
+
+    print(f"-> Preco atual da nossa loja       : R$ {preco_nossa_loja:>9.2f}")
+    if isinstance(concorrente_top, dict):
+        print(f"-> Concorrente mais perigoso       : {concorrente_top['loja']} (R$ {concorrente_top['preco']:.2f} | Frete Gratis: {concorrente_top['frete_gratis']} | Avaliacao: {concorrente_top['avaliacao']})")
+        print(f"-> Reducao recomendada para cobrir : R$ {valor_rebaixamento:>9.2f}")
+    else:
+        print(f"-> Situacao competitiva            : {concorrente_top}")
+    print(f"-> Media geral de precos do mercado: R$ {media_mercado:>9.2f}")
+
+    print("\n" + "=" * 62)
     print("      PIPELINE CONCLUIDO COM SUCESSO! [OK]")
-    print("=" * 60 + "\n")
+    print("=" * 62 + "\n")
 
 
 if __name__ == "__main__":
