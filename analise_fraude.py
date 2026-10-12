@@ -1,6 +1,6 @@
 # ==============================================================================
 # PROJETO: Análise de Fraude e Risco em Transações
-# AUTOR: Ryan Oliveira
+# AUTOR: Ryan Aurélio
 # ==============================================================================
 
 lista_transacoes = [

@@ -176,5 +176,5 @@ Roadmap de evolução técnica planejado para as próximas iterações:
 
 ## 👨‍💻 Autor
 
-Desenvolvido por **[Ryan Oliveira](https://github.com/ryanaurelio2005)**.  
+Desenvolvido por **[Ryan Aurélio](https://github.com/ryanaurelio2005)**.  
 *Estudante de Ciência de Dados e Inteligência Artificial | Foco em Engenharia de Machine Learning.*
