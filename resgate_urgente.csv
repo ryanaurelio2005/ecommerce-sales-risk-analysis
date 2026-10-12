@@ -1,0 +1,4 @@
+id_transacao,cliente,produto,valor,status_pagamento
+102,Juliana Paes,Mouse Sem Fio,120.00,recusado
+104,Fernanda Souza,Teclado Mecanico,350.00,recusado
+106,Amanda Lima,Headset Gamer,420.00,recusado

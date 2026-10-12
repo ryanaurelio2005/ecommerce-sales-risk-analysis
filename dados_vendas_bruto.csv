@@ -1,0 +1,8 @@
+id_transacao,cliente,produto,valor,status_pagamento
+101,Marcos Castro,Notebook Dell,4500.00,aprovado
+102,Juliana Paes,Mouse Sem Fio,120.00,recusado
+103,Roberto Carlos,Monitor LG,1350.00,aprovado
+104,Fernanda Souza,Teclado Mecanico,350.00,recusado
+105,Lucas Mendes,Cadeira Gamer,1800.00,pendente
+106,Amanda Lima,Headset Gamer,420.00,recusado
+107,Thiago Silva,Notebook Dell,4500.00,aprovado
